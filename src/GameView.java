@@ -47,10 +47,14 @@ public class GameView extends JPanel implements KeyListener, ActionListener {
 
         // Draw Background
         g2.setColor(model.backgroundColor);
-        g2.fillRect(0,0, model.screenSizeX, model.screenSizeY);
+        g2.fillRect(0,0, this.getWidth(), this.getHeight());
 
         // Draw Paddle
         g2.setColor(model.paddleColor);
+        model.paddleWidth = this.getWidth()/8;
+        if (model.paddlePositionX >= this.getWidth() - model.paddleWidth) {
+            model.paddlePositionX = this.getWidth() - model.paddleWidth;
+        }
         g2.fillRect(model.paddlePositionX, model.paddlePositionY, model.paddleWidth, model.paddleHeight);
 
         // Draw Ball
@@ -63,6 +67,9 @@ public class GameView extends JPanel implements KeyListener, ActionListener {
         for (int i = 0; i < arrayOfBlocks.length; ++i) {
             for (int j = 0; j < arrayOfBlocks[0].length; ++j) {
                 if (arrayOfBlocks[i][j] > 0) {
+
+                    model.blockWidth = (this.getWidth() - 100) / 8;
+
                     g2.setColor(model.blockColor);
                     g2.fillRect(j * model.blockWidth + 50, i * model.blockHeight + 50, model.blockWidth, model.blockHeight);
                     g2.setStroke(new BasicStroke(3));
@@ -118,7 +125,7 @@ public class GameView extends JPanel implements KeyListener, ActionListener {
             model.ballPositionY += model.ballChangePositionY;
 
             // Side Border Check
-            if (model.ballPositionX < 0 || model.ballPositionX > model.screenSizeX - model.ballWidth) {
+            if (model.ballPositionX < 0 || model.ballPositionX > this.getWidth() - model.ballWidth) {
                 model.ballChangePositionX = -model.ballChangePositionX;
             }
 
@@ -131,6 +138,8 @@ public class GameView extends JPanel implements KeyListener, ActionListener {
 
         repaint();
     }
+
+
 
     public GameView(Model m) {
         model = m;
@@ -152,10 +161,12 @@ public class GameView extends JPanel implements KeyListener, ActionListener {
     }
 
     public void movePaddleRight() {
+        model.paddleChangePosition = this.getWidth() / 45;
         model.paddlePositionX += model.paddleChangePosition;
     }
 
     public void movePaddleLeft() {
+        model.paddleChangePosition = this.getWidth() / 45;
         model.paddlePositionX -= model.paddleChangePosition;
     }
 
@@ -167,8 +178,8 @@ public class GameView extends JPanel implements KeyListener, ActionListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            if (model.paddlePositionX >= model.screenSizeX - model.paddleWidth) {
-                model.paddlePositionX = model.screenSizeX - model.paddleWidth;
+            if (model.paddlePositionX >= this.getWidth() - model.paddleWidth) {
+                model.paddlePositionX = this.getWidth() - model.paddleWidth;
             } else {
                 movePaddleRight();
             }
@@ -190,9 +201,6 @@ public class GameView extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-
-
         repaint();
     }
 }

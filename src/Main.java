@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentListener;
 import java.awt.event.ComponentEvent;
+import java.io.*;
+import java.util.*;
 
 public class Main extends JFrame {
     private JFrame mainFrame;
@@ -12,10 +14,13 @@ public class Main extends JFrame {
         Model model = new Model();
         mainFrame = new JFrame("Breakout");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        mainFrame.setLayout(new BorderLayout());
+        mainFrame.setMinimumSize(new Dimension(400, 600));
+        mainFrame.setMaximumSize(new Dimension(1250, 700));
         gameView = new GameView(model);
 
-        mainFrame.add(gameView);
+
+        mainFrame.add(gameView, BorderLayout.CENTER);
 
         mainFrame.setSize(model.screenSizeX,model.screenSizeY);
         mainFrame.setResizable(true);

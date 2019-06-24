@@ -13,7 +13,7 @@ public class Model {
     public int ballWidth = 20;
     public int ballHeight = 20;
 
-    public int paddlePositionX = 300;
+    public int paddlePositionX = 375;
     public int paddlePositionY = 550;
     public int paddleWidth = 100;
     public int paddleHeight = 10;
