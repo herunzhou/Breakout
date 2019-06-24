@@ -3,11 +3,11 @@ import java.awt.*;
 public class Model {
     public boolean isPlaying = true;
     public int score = 0;
-    public int numBlocks = 30;
+    public int numBlocks = 40;
     public int fps = 30;
 
-    public int ballPositionX = 200;
-    public int ballPositionY = 300;
+    public int ballPositionX = 500;
+    public int ballPositionY = 500;
     public int ballChangePositionX = -4;
     public int ballChangePositionY = -8;
     public int ballWidth = 20;
@@ -18,6 +18,10 @@ public class Model {
     public int paddleWidth = 100;
     public int paddleHeight = 10;
     public int paddleChangePosition = 20;
+
+    public int blockWidth = 100;
+    public int blockHeight = 50;
+    public Color blockColor = Color.RED;
 
     public int screenSizeX = 900;
     public int screenSizeY = 600;
