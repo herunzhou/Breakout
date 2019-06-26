@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import java.awt.font.TextAttribute;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.security.Key;
 import java.util.*;
 import java.util.Timer;
 
@@ -92,11 +93,11 @@ public class GameView extends JPanel implements KeyListener, ActionListener, IVi
             g2.setColor(Color.WHITE);
 
             if (model.didLose) {
-                g2.drawString("YOU LOST!", 50, 35);
+                g2.drawString("YOU LOST! Press R To Play Again!", 50, 35);
             } else if (model.numBlocks > 0) {
                 g2.drawString("YOUR SCORE: " + model.score, 50, 35);
             } else {
-                g2.drawString("YOU WON!", 50, 35);
+                g2.drawString("YOU WON! Press R To Play Again!", 50, 35);
             }
 
         } else {
@@ -104,7 +105,7 @@ public class GameView extends JPanel implements KeyListener, ActionListener, IVi
             g2.drawString("Use Left and Right Arrow Keys to move paddle.", 10, 40);
             g2.drawString("Prevent the ball from going below the paddle.", 10, 70);
             g2.drawString("Try to destroy all the Blocks.", 10, 100);
-            g2.drawString("A Blue Block increases Paddle size for 10 secs.", 10, 130);
+            g2.drawString("A Blue Block increases paddle size for 10 secs.", 10, 130);
             g2.drawString("Press S to Begin the Game...", 10, 160);
             g2.drawString("Created By: Herun Zhou (h74zhou)", 10, this.getHeight() - 100);
         }
@@ -288,6 +289,26 @@ public class GameView extends JPanel implements KeyListener, ActionListener, IVi
                 movePaddleLeft();
             }
         }
+
+        if ((e.getKeyCode() == KeyEvent.VK_R && model.didLose) ||
+                (e.getKeyCode() == KeyEvent.VK_R && model.numBlocks == 0)) {
+            model.didLose = false;
+            model.numBlocks = 40;
+
+            for (int i = 0; i < arrayOfBlocks.length; ++i) {
+                for (int j = 0; j < arrayOfBlocks[0].length; ++j) {
+                    arrayOfBlocks[i][j] = 1;
+                }
+            }
+
+            model.ballPositionX = model.originalBallPositionX;
+            model.ballPositionY = model.originalBallPositionY;
+            model.ballChangePositionX = model.ballRestartChangeX;
+            model.ballChangePositionY = model.ballRestartChangeY;
+            model.score = 0;
+
+        }
+        
     }
 
     @Override

@@ -25,8 +25,13 @@ public class Model {
 
     public int ballPositionX = 500;
     public int ballPositionY = 500;
+    public int originalBallPositionX = 500;
+    public int originalBallPositionY = 500;
+
     public int ballChangePositionX = -4;
     public int ballChangePositionY = -8;
+    public int ballRestartChangeX = -4;
+    public int ballRestartChangeY = -8;
     public int ballWidth = 20;
     public int ballHeight = 20;
 
