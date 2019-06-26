@@ -10,7 +10,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.*;
 import java.util.Timer;
 
-public class GameView extends JPanel implements KeyListener, ActionListener {
+public class GameView extends JPanel implements KeyListener, ActionListener, IView {
     Model model;
     private Timer timer;
     private Ellipse2D.Double theBall;
@@ -101,10 +101,11 @@ public class GameView extends JPanel implements KeyListener, ActionListener {
 
         } else {
             g2.setColor(Color.WHITE);
-            g2.drawString("Use Left and Right Arrow Keys to move paddle!", 10, 40);
-            g2.drawString("Prevent the ball from going below the paddle!", 10, 70);
-            g2.drawString("Try to destroy all the Blocks!", 10, 100);
-            g2.drawString("Press S to Begin the Game...", 10, 130);
+            g2.drawString("Use Left and Right Arrow Keys to move paddle.", 10, 40);
+            g2.drawString("Prevent the ball from going below the paddle.", 10, 70);
+            g2.drawString("Try to destroy all the Blocks.", 10, 100);
+            g2.drawString("A Blue Block increases Paddle size for 10 secs.", 10, 130);
+            g2.drawString("Press S to Begin the Game...", 10, 160);
             g2.drawString("Created By: Herun Zhou (h74zhou)", 10, this.getHeight() - 100);
         }
     }
@@ -186,7 +187,7 @@ public class GameView extends JPanel implements KeyListener, ActionListener {
             }
 
             // Bottom Check
-            if (model.ballPositionY > this.getHeight() - 20) {
+            if (model.ballPositionY > this.getHeight() - 20 && model.numBlocks > 0) {
                 model.ballChangePositionY = 0;
                 model.ballChangePositionX = 0;
                 model.didLose = true;
@@ -207,6 +208,10 @@ public class GameView extends JPanel implements KeyListener, ActionListener {
 
         }
 
+    }
+
+    public void updateView() {
+        repaint();
     }
 
     public GameView(Model m) {
@@ -292,6 +297,6 @@ public class GameView extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        repaint();
+       repaint();
     }
 }

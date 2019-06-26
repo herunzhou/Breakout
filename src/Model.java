@@ -9,6 +9,10 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.*;
 
+interface IView {
+    public void updateView();
+}
+
 public class Model {
     public boolean isPlaying = false;
     public boolean didLose = false;
@@ -16,6 +20,8 @@ public class Model {
     public int numBlocks = 40;
     public int fps = 30;
     public int ballSpeed;
+
+    IView view;
 
     public int ballPositionX = 500;
     public int ballPositionY = 500;
@@ -49,4 +55,18 @@ public class Model {
     public int secondBlueBlockCount = 0;
     public boolean secondBlueBlockHit = false;
 
+
+    public void setView(IView view) {
+        this.view = view;
+        view.updateView();
+    }
+
+    public void changedViewInfo() {
+        notifyObservers();
+    }
+
+    // Called From Controller (In Game view Class)
+    private void notifyObservers() {
+        view.updateView();
+    }
 }
