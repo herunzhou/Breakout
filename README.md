@@ -1,3 +1,3 @@
 # Breakout
 
-Welcome to my JAVA Breakout Game - CS348
+Welcome to my JAVA Breakout Game - CS349
